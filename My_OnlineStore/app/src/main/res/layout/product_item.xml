@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="productViewModel"
+            type="com.example.my_onlinestore.viewmodels.ProductViewModel" />
+
+        <variable
+            name="productListViewModel"
+            type="com.example.my_onlinestore.viewmodels.ProductListViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/product_name"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:text="@{productViewModel.name}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.059"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.448" />
+
+        <TextView
+            android:id="@+id/product_price"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:text="@{Double.toString(productViewModel.price)}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.075"
+            app:layout_constraintStart_toEndOf="@+id/product_name"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.448" />
+
+        <TextView
+            android:id="@+id/product_count"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:text="@{Long.toString(productViewModel.count)}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.122"
+            app:layout_constraintStart_toEndOf="@+id/product_price"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.448" />
+
+        <ImageButton
+            android:id="@+id/download_button"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="42dp"
+            android:layout_height="31dp"
+            android:onClick="@{(view) -> productListViewModel.onBuyProduct(productViewModel)}"
+            android:src="@drawable/ic_cart"
+            android:text="@string/buy"
+            android:tint="@color/colorPrimary"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.176"
+            app:layout_constraintStart_toEndOf="@+id/product_count"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <ImageButton
+            android:id="@+id/like_button"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="42dp"
+            android:layout_height="31dp"
+            android:onClick="@{(view) -> productListViewModel.onLikeProduct(productViewModel)}"
+            android:src="@drawable/ic_favorite"
+            android:text="@string/like"
+            android:tint="@{productViewModel.isLike ? @color/colorLike : @color/colorPrimary}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.78"
+            app:layout_constraintStart_toEndOf="@+id/product_count"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

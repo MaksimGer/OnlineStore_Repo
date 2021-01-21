@@ -10,7 +10,15 @@
     <fragment
         android:id="@+id/categoriesFragment"
         android:name="com.example.my_onlinestore.views.CategoryFragment"
-        android:label="@string/catalog" />
+        android:label="@string/catalog" >
+        <action
+            android:id="@+id/action_categoriesFragment_to_productsFragment"
+            app:destination="@id/productsFragment" >
+            <argument
+                android:name="categoryViewModel"
+                app:argType="com.example.my_onlinestore.viewmodels.CategoryViewModel" />
+        </action>
+    </fragment>
     <fragment
         android:id="@+id/productFavoriteFragment"
         android:name="com.example.my_onlinestore.views.ProductFavoriteFragment"
@@ -23,4 +31,12 @@
         android:id="@+id/cartFragment"
         android:name="com.example.my_onlinestore.views.CartFragment"
         android:label="@string/cart" />
+    <fragment
+        android:id="@+id/productsFragment"
+        android:name="com.example.my_onlinestore.views.ProductsFragment"
+        android:label="@string/products">
+        <argument
+            android:name="categoryViewModel"
+            app:argType="com.example.my_onlinestore.viewmodels.CategoryViewModel" />
+    </fragment>
 </navigation>

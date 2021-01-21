@@ -5,4 +5,7 @@
     <string name="catalog">Catalog</string>
     <string name="personalArea">Personal Area</string>
     <string name="cart">Cart</string>
+    <string name="products">Products</string>
+    <string name="buy">Buy</string>
+    <string name="like">Favorite</string>
 </resources>

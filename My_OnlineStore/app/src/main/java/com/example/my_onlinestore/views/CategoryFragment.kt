@@ -4,12 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.viewModels
 import androidx.annotation.CallSuper
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.FragmentNavigator
+import androidx.navigation.fragment.FragmentNavigatorExtras
+import androidx.navigation.fragment.findNavController
 import com.example.my_onlinestore.R
 import com.example.my_onlinestore.databinding.CategoryItemBinding
 import com.example.my_onlinestore.databinding.CategoryListLayoutBinding
@@ -19,24 +21,30 @@ import com.example.my_onlinestore.views.adapters.Holder
 import com.example.my_onlinestore.views.adapters.HolderBinder
 import com.example.my_onlinestore.views.adapters.HolderCreator
 import com.example.my_onlinestore.views.adapters.SimpleListAdapter
-import com.example.my_onlinestore.views.adapters.callbacks.CayegoryDiffCallback
+import com.example.my_onlinestore.views.adapters.callbacks.CategoryDiffCallback
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class CategoryFragment: Fragment() {
-    open val mViewModel: CategoryListViewModel by viewModels()
+    private val mViewModel: CategoryListViewModel by viewModels()
 
-    private val mCategoryListViewModel: CategoryListViewModel by viewModels()
     private lateinit var mBinding: CategoryListLayoutBinding
 
     private val mAdapter = SimpleListAdapter(
             HolderCreator(this::createHolder),
             HolderBinder(this::bindHolder),
-            CayegoryDiffCallback()
+            CategoryDiffCallback()
     )
 
     private fun bindHolder(viewModel: CategoryViewModel, holder: Holder<CategoryItemBinding>){
         holder.binding.categoryViewModel = viewModel
+        holder.binding.categoryListViewModel = mViewModel
+        holder.binding.categoryName.setOnClickListener {
+            val extras = FragmentNavigatorExtras(
+                it to "categoryName"
+            )
+            findNavController().navigate(CategoryFragmentDirections.actionCategoriesFragmentToProductsFragment(viewModel), extras)
+        }
     }
 
     private fun createHolder(parent: ViewGroup): Holder<CategoryItemBinding> {

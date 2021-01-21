@@ -4,6 +4,8 @@ import com.example.my_onlinestore.infrastructure.clients.interfaces.IApiDefiniti
 import com.example.my_onlinestore.infrastructure.clients.interfaces.IServerClient
 import com.example.my_onlinestore.model.Attribute
 import com.example.my_onlinestore.model.Category
+import com.example.my_onlinestore.model.Product
+import com.example.my_onlinestore.model.server_dto.ServerCategory
 import com.google.gson.GsonBuilder
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import retrofit2.Retrofit
@@ -43,6 +45,28 @@ class ServerClient: IServerClient {
 
         return mService.getCategories(auth).await().map {serverCategory ->
             Category(serverCategory.id, serverCategory.name, setOf(), setOf())
+        }
+    }
+
+    override suspend fun getCategory(categoryId: Long): Category {
+        val auth: String = ADMIN_AUTHENTICATION
+
+        val serverCategory: ServerCategory  = mService.getCategory(auth, categoryId).await()
+
+        return Category(serverCategory.id, serverCategory.name, setOf(), getProductsByCategory(serverCategory.id).toSet())
+    }
+
+    override suspend fun getProductsByCategory(categoryId: Long): List<Product> {
+        val auth: String = ADMIN_AUTHENTICATION
+        val unknownCategory: Long = 0;
+
+        if(categoryId == unknownCategory)
+            return mService.getAllProducts(auth).await().map { serverProduct ->
+                Product(serverProduct.id, serverProduct.name, serverProduct.price, serverProduct.count, serverProduct.category)
+            }
+
+        return  mService.getProductsByCategory(auth, categoryId).await().map { serverProduct ->
+            Product(serverProduct.id, serverProduct.name, serverProduct.price, serverProduct.count, serverProduct.category)
         }
     }
 }

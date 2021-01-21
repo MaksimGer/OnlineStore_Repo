@@ -1,3 +1,5 @@
 package com.example.my_onlinestore.model
 
-data class Attribute(val id: Long, val name: String, val categories: Set<Category>)
+import com.example.my_onlinestore.model.server_dto.ServerCategory
+
+data class Attribute(val id: Long, val name: String, val categories: Set<ServerCategory>)

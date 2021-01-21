@@ -4,7 +4,7 @@ import androidx.recyclerview.widget.DiffUtil
 import com.example.my_onlinestore.viewmodels.AttributeViewModel
 import com.example.my_onlinestore.viewmodels.CategoryViewModel
 
-class CayegoryDiffCallback : DiffUtil.ItemCallback<CategoryViewModel>(){
+class CategoryDiffCallback : DiffUtil.ItemCallback<CategoryViewModel>(){
     override fun areItemsTheSame(
             oldItem: CategoryViewModel,
             newItem: CategoryViewModel
