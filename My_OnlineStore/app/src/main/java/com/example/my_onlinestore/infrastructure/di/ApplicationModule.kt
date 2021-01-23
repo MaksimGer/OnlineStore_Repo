@@ -4,9 +4,11 @@ import com.example.my_onlinestore.infrastructure.clients.ServerClient
 import com.example.my_onlinestore.infrastructure.clients.interfaces.IServerClient
 import com.example.my_onlinestore.repositories.AttributeRepository
 import com.example.my_onlinestore.repositories.CategoryRepository
+import com.example.my_onlinestore.repositories.ParameterRepository
 import com.example.my_onlinestore.repositories.ProductRepository
 import com.example.my_onlinestore.repositories.interfaces.IAttributeRepository
 import com.example.my_onlinestore.repositories.interfaces.ICategoryRepository
+import com.example.my_onlinestore.repositories.interfaces.IParameterRepository
 import com.example.my_onlinestore.repositories.interfaces.IProductRepository
 import dagger.Module
 import dagger.Provides
@@ -37,5 +39,10 @@ class ApplicationModule {
     @Provides
     fun provideProductRepo(serverClient: IServerClient): IProductRepository {
         return ProductRepository(serverClient)
+    }
+
+    @Provides
+    fun provideParameterRepo(serverClient: IServerClient): IParameterRepository {
+        return ParameterRepository(serverClient)
     }
 }

@@ -8,4 +8,7 @@
     <string name="products">Products</string>
     <string name="buy">Buy</string>
     <string name="like">Favorite</string>
+    <string name="categories">Categories</string>
+    <string name="add_category">Add category</string>
+    <string name="category_name">Category name</string>
 </resources>

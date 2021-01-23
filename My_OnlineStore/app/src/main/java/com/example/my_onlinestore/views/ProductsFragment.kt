@@ -9,6 +9,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.FragmentNavigatorExtras
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.my_onlinestore.R
 import com.example.my_onlinestore.databinding.ProductItemBinding
@@ -38,6 +40,12 @@ class ProductsFragment: Fragment() {
 
     private fun bindHolder(viewModel: ProductViewModel, holder: Holder<ProductItemBinding>){
         holder.binding.productViewModel = viewModel
+        holder.binding.productName.setOnClickListener {
+            val extras = FragmentNavigatorExtras(
+                    it to "productName"
+            )
+            findNavController().navigate(ProductsFragmentDirections.actionProductsFragmentToParametersFragment(viewModel), extras)
+        }
     }
 
     private fun createHolder(parent: ViewGroup): Holder<ProductItemBinding> {
@@ -55,7 +63,7 @@ class ProductsFragment: Fragment() {
             savedInstanceState: Bundle?
     ): View? {
         val categoryViewModel: CategoryViewModel = mArguments.categoryViewModel
-        mViewModel.downloadProducts(categoryViewModel.id.toLong())
+        mViewModel.downloadProducts(categoryViewModel.id)
 
         mBinding = DataBindingUtil.inflate(inflater, R.layout.show_category_products, container, false )
         mBinding.productListViewModel = mViewModel

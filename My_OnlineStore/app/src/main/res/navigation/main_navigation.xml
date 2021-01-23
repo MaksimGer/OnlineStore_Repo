@@ -18,6 +18,9 @@
                 android:name="categoryViewModel"
                 app:argType="com.example.my_onlinestore.viewmodels.CategoryViewModel" />
         </action>
+        <action
+            android:id="@+id/action_categoriesFragment_to_createCategoryFragment"
+            app:destination="@id/createCategoryFragment" />
     </fragment>
     <fragment
         android:id="@+id/productFavoriteFragment"
@@ -31,6 +34,7 @@
         android:id="@+id/cartFragment"
         android:name="com.example.my_onlinestore.views.CartFragment"
         android:label="@string/cart" />
+
     <fragment
         android:id="@+id/productsFragment"
         android:name="com.example.my_onlinestore.views.ProductsFragment"
@@ -38,5 +42,29 @@
         <argument
             android:name="categoryViewModel"
             app:argType="com.example.my_onlinestore.viewmodels.CategoryViewModel" />
+        <action
+            android:id="@+id/action_productsFragment_to_parametersFragment"
+            app:destination="@id/parametersFragment">
+            <argument
+                android:name="productViewModel"
+                app:argType="com.example.my_onlinestore.viewmodels.ProductViewModel" />
+        </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/parametersFragment"
+        android:name="com.example.my_onlinestore.views.ParametersFragment"
+        android:label="ParametersFragment">
+        <argument
+            android:name="productViewModel"
+            app:argType="com.example.my_onlinestore.viewmodels.ProductViewModel" />
+    </fragment>
+    <fragment
+        android:id="@+id/createCategoryFragment"
+        android:name="com.example.my_onlinestore.views.CreateCategoryFragment"
+        android:label="CreateCategoryFragment" >
+        <action
+            android:id="@+id/action_createCategoryFragment_to_categoriesFragment"
+            app:destination="@id/categoriesFragment" />
     </fragment>
 </navigation>

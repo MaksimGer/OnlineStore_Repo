@@ -7,7 +7,7 @@ import java.io.Serializable
 
 data class CategoryViewModel(
         val category: Category,
-        val id: String = category.id.toString(),
+        val id: Long = category.id,
         val name: String = category.name,
         val attributes: Set<ServerAttribute> = category.attributes,
         val products: Set<Product> = category.products

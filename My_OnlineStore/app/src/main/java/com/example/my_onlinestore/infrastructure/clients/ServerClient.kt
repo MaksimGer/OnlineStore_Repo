@@ -4,6 +4,7 @@ import com.example.my_onlinestore.infrastructure.clients.interfaces.IApiDefiniti
 import com.example.my_onlinestore.infrastructure.clients.interfaces.IServerClient
 import com.example.my_onlinestore.model.Attribute
 import com.example.my_onlinestore.model.Category
+import com.example.my_onlinestore.model.Parameter
 import com.example.my_onlinestore.model.Product
 import com.example.my_onlinestore.model.server_dto.ServerCategory
 import com.google.gson.GsonBuilder
@@ -68,5 +69,19 @@ class ServerClient: IServerClient {
         return  mService.getProductsByCategory(auth, categoryId).await().map { serverProduct ->
             Product(serverProduct.id, serverProduct.name, serverProduct.price, serverProduct.count, serverProduct.category)
         }
+    }
+
+    override suspend fun getParametersByProduct(productId: Long): List<Parameter> {
+        val auth: String = ADMIN_AUTHENTICATION
+
+        return  mService.getParametersByProduct(auth, productId).await()
+    }
+
+    override suspend fun saveCategory(newCategory: ServerCategory): Category {
+        val auth: String = ADMIN_AUTHENTICATION
+
+        val createdCategory: ServerCategory = mService.addCategory(auth, newCategory).await()
+
+        return Category(createdCategory.id, createdCategory.name, setOf(), setOf())
     }
 }

@@ -23,6 +23,7 @@ import com.example.my_onlinestore.views.adapters.HolderCreator
 import com.example.my_onlinestore.views.adapters.SimpleListAdapter
 import com.example.my_onlinestore.views.adapters.callbacks.CategoryDiffCallback
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.category_list_layout.view.*
 
 @AndroidEntryPoint
 class CategoryFragment: Fragment() {
@@ -66,6 +67,9 @@ class CategoryFragment: Fragment() {
         mBinding.categoryViewModel = mViewModel
         mBinding.lifecycleOwner = viewLifecycleOwner
         mBinding.categoryList.adapter = mAdapter
+        mBinding.btnCreateCategory.setOnClickListener {
+            findNavController().navigate(CategoryFragmentDirections.actionCategoriesFragmentToCreateCategoryFragment())
+        }
         return mBinding.root
     }
 
