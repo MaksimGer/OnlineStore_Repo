@@ -16,7 +16,6 @@ class ProductDiffCallback: DiffUtil.ItemCallback<ProductViewModel>(){
             newItem: ProductViewModel
     ): Boolean {
         return oldItem.name == newItem.name &&
-                oldItem.category == newItem.category &&
                 oldItem.price == newItem.price &&
                 oldItem.count == newItem.count
     }

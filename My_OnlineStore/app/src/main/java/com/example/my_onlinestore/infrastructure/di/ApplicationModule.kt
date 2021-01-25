@@ -1,15 +1,15 @@
 package com.example.my_onlinestore.infrastructure.di
 
+import android.app.Application
+import androidx.room.Room
 import com.example.my_onlinestore.infrastructure.clients.ServerClient
 import com.example.my_onlinestore.infrastructure.clients.interfaces.IServerClient
+import com.example.my_onlinestore.infrastructure.database.ProductDatabase
 import com.example.my_onlinestore.repositories.AttributeRepository
 import com.example.my_onlinestore.repositories.CategoryRepository
 import com.example.my_onlinestore.repositories.ParameterRepository
 import com.example.my_onlinestore.repositories.ProductRepository
-import com.example.my_onlinestore.repositories.interfaces.IAttributeRepository
-import com.example.my_onlinestore.repositories.interfaces.ICategoryRepository
-import com.example.my_onlinestore.repositories.interfaces.IParameterRepository
-import com.example.my_onlinestore.repositories.interfaces.IProductRepository
+import com.example.my_onlinestore.repositories.interfaces.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -37,12 +37,39 @@ class ApplicationModule {
     }
 
     @Provides
-    fun provideProductRepo(serverClient: IServerClient): IProductRepository {
-        return ProductRepository(serverClient)
+    @Singleton
+    fun provideProductRepo(serverClient: IServerClient, productDatabase: ProductDatabase, categoryRepository: ICategoryRepository): ProductRepository {
+        return ProductRepository(serverClient, productDatabase, categoryRepository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideIProductProductRepo(productRepository: ProductRepository): IProductRepository {
+        return productRepository
+    }
+
+    @Provides
+    @Singleton
+    fun provideICartProductRepo(productRepository: ProductRepository): ICartProductsRepository {
+        return productRepository
+    }
+
+    @Provides
+    @Singleton
+    fun provideIFavoriteProductRepo(productRepository: ProductRepository): IFavoriteProductsRepository {
+        return productRepository
     }
 
     @Provides
     fun provideParameterRepo(serverClient: IServerClient): IParameterRepository {
         return ParameterRepository(serverClient)
+    }
+
+    @Provides
+    fun provideRoom(application: Application): ProductDatabase {
+        return Room.databaseBuilder(
+            application, ProductDatabase::class.java,
+            "LocalProductDatabase"
+        ).build()
     }
 }

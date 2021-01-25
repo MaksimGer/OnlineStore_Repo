@@ -10,6 +10,10 @@ class CategoryRepository(private val mServerClient: IServerClient): ICategoryRep
         return mServerClient.getCategorise()
     }
 
+    override suspend fun getCategory(categoryId: Long): ServerCategory {
+        return mServerClient.getCategory(categoryId)
+    }
+
     override suspend fun saveCategory(category: ServerCategory): Category {
         return mServerClient.saveCategory(category)
     }

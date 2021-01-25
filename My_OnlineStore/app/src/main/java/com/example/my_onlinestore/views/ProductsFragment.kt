@@ -40,11 +40,20 @@ class ProductsFragment: Fragment() {
 
     private fun bindHolder(viewModel: ProductViewModel, holder: Holder<ProductItemBinding>){
         holder.binding.productViewModel = viewModel
+        holder.binding.productListViewModel = mViewModel
         holder.binding.productName.setOnClickListener {
             val extras = FragmentNavigatorExtras(
                     it to "productName"
             )
             findNavController().navigate(ProductsFragmentDirections.actionProductsFragmentToParametersFragment(viewModel), extras)
+        }
+        holder.binding.likeButton.setOnClickListener {
+
+            if(!viewModel.isLike){
+                mViewModel.likeProduct(viewModel)
+            }else{
+                mViewModel.unLikeProduct(viewModel)
+            }
         }
     }
 

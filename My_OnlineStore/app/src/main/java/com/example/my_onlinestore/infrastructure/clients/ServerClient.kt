@@ -49,12 +49,12 @@ class ServerClient: IServerClient {
         }
     }
 
-    override suspend fun getCategory(categoryId: Long): Category {
+    override suspend fun getCategory(categoryId: Long): ServerCategory {
         val auth: String = ADMIN_AUTHENTICATION
 
         val serverCategory: ServerCategory  = mService.getCategory(auth, categoryId).await()
 
-        return Category(serverCategory.id, serverCategory.name, setOf(), getProductsByCategory(serverCategory.id).toSet())
+        return serverCategory
     }
 
     override suspend fun getProductsByCategory(categoryId: Long): List<Product> {
