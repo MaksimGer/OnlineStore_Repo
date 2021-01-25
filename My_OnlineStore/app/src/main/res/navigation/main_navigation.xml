@@ -49,6 +49,9 @@
                 android:name="productViewModel"
                 app:argType="com.example.my_onlinestore.viewmodels.ProductViewModel" />
         </action>
+        <action
+            android:id="@+id/action_productsFragment_to_categoriesFragment"
+            app:destination="@id/categoriesFragment" />
     </fragment>
 
     <fragment

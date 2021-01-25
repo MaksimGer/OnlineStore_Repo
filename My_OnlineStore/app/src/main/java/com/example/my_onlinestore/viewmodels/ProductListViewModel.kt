@@ -5,6 +5,7 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import com.example.my_onlinestore.databinding.ProductItemBinding
 import com.example.my_onlinestore.model.Product
+import com.example.my_onlinestore.model.server_dto.ServerCategory
 import com.example.my_onlinestore.repositories.interfaces.ICategoryRepository
 import com.example.my_onlinestore.repositories.interfaces.IFavoriteProductsRepository
 import com.example.my_onlinestore.repositories.interfaces.IProductRepository
@@ -65,6 +66,19 @@ class ProductListViewModel@ViewModelInject constructor(
         product.isLike = false
     }
 
+    fun deleteCategory(category: CategoryViewModel){
+        viewModelScope.launch(Dispatchers.IO) {
+            mCategroyRepository.deleteCategory(
+                ServerCategory(
+                    category.category.id,
+                    category.category.name,
+                    setOf(),
+                    setOf()
+                )
+            )
+        }
+    }
+
     private fun setCategories(products: List<Product>){
         viewModelScope.launch(Dispatchers.IO) {
             for (product in products){
@@ -73,4 +87,5 @@ class ProductListViewModel@ViewModelInject constructor(
             }
         }
     }
+
 }

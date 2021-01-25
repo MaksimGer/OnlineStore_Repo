@@ -17,4 +17,8 @@ class CategoryRepository(private val mServerClient: IServerClient): ICategoryRep
     override suspend fun saveCategory(category: ServerCategory): Category {
         return mServerClient.saveCategory(category)
     }
+
+    override suspend fun deleteCategory(category: ServerCategory): String {
+        return mServerClient.deleteCategory(category)
+    }
 }

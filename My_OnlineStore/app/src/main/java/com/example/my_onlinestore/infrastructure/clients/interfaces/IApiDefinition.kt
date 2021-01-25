@@ -1,11 +1,14 @@
 package com.example.my_onlinestore.infrastructure.clients.interfaces
 
+import androidx.room.Delete
 import com.example.my_onlinestore.model.Category
 import com.example.my_onlinestore.model.Parameter
 import com.example.my_onlinestore.model.server_dto.ServerAttribute
 import com.example.my_onlinestore.model.server_dto.ServerCategory
 import com.example.my_onlinestore.model.server_dto.ServerProduct
 import kotlinx.coroutines.Deferred
+import okhttp3.ResponseBody
+import retrofit2.Call
 import retrofit2.http.*
 
 interface IApiDefinition {
@@ -39,4 +42,7 @@ interface IApiDefinition {
             @Header("Authorization") auth: String,
             @Body newCategory: ServerCategory
     ): Deferred<ServerCategory>
+
+    @DELETE("categories/")
+    fun deleteCategory(@Header("Authorization") auth: String, @Query("id") id: Long): Deferred<String>
 }

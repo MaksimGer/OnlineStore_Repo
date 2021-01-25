@@ -84,4 +84,9 @@ class ServerClient: IServerClient {
 
         return Category(createdCategory.id, createdCategory.name, setOf(), setOf())
     }
+
+    override suspend fun deleteCategory(category: ServerCategory): String {
+        val auth: String = ADMIN_AUTHENTICATION
+        return mService.deleteCategory(auth, category.id).await()
+    }
 }

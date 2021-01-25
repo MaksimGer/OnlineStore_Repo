@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.annotation.CallSuper
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -79,6 +80,12 @@ class ProductsFragment: Fragment() {
         mBinding.categoryViewModel = categoryViewModel
         mBinding.lifecycleOwner = viewLifecycleOwner
         mBinding.productList.adapter = mAdapter
+        mBinding.btnDeleteCategory.setOnClickListener {
+
+            mViewModel.deleteCategory(categoryViewModel)
+            findNavController().navigate(ProductsFragmentDirections.actionProductsFragmentToCategoriesFragment())
+
+        }
         return mBinding.root
     }
 

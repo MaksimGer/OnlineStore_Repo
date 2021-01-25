@@ -13,4 +13,5 @@ interface IServerClient {
     suspend fun getProductsByCategory(categoryId: Long): List<Product>
     suspend fun getParametersByProduct(productId: Long): List<Parameter>
     suspend fun saveCategory(newCategory: ServerCategory): Category
+    suspend fun deleteCategory(category: ServerCategory): String
 }

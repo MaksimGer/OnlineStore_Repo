@@ -12,4 +12,5 @@
     <string name="add_category">Add category</string>
     <string name="category_name">Category name</string>
     <string name="favorite_products">Favorite products</string>
+    <string name="delete_category">Delete category</string>
 </resources>

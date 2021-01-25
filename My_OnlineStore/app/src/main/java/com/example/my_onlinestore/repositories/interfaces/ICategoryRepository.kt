@@ -7,4 +7,5 @@ interface ICategoryRepository {
     suspend fun getCategories(): List<Category>
     suspend fun getCategory(categoryId: Long): ServerCategory
     suspend fun saveCategory(category: ServerCategory): Category
+    suspend fun deleteCategory(category: ServerCategory): String
 }
