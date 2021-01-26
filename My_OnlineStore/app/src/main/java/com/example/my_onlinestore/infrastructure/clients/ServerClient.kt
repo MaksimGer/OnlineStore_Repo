@@ -9,8 +9,11 @@ import com.example.my_onlinestore.model.Product
 import com.example.my_onlinestore.model.server_dto.ServerCategory
 import com.google.gson.GsonBuilder
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
+import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
+
 
 class ServerClient: IServerClient {
 
@@ -24,10 +27,14 @@ class ServerClient: IServerClient {
     init {
         val gson = GsonBuilder().create()
 
+        val client = OkHttpClient.Builder()
+                .connectTimeout(20, TimeUnit.SECONDS)
+                .readTimeout(20, TimeUnit.SECONDS).build()
+
         val retrofit = Retrofit.Builder()
             .addCallAdapterFactory(CoroutineCallAdapterFactory())
             .addConverterFactory(GsonConverterFactory.create(gson))
-            .baseUrl(BASE_URL)
+            .baseUrl(BASE_URL).client(client)
             .build()
         mService = retrofit.create(IApiDefinition::class.java)
 
@@ -44,7 +51,7 @@ class ServerClient: IServerClient {
     override suspend fun getCategorise(): List<Category> {
         val auth: String = ADMIN_AUTHENTICATION
 
-        return mService.getCategories(auth).await().map {serverCategory ->
+        return mService.getCategories(auth).await().map { serverCategory ->
             Category(serverCategory.id, serverCategory.name, setOf(), setOf())
         }
     }

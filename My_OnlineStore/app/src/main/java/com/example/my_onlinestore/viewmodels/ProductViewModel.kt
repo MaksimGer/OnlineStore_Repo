@@ -1,7 +1,5 @@
 package com.example.my_onlinestore.viewmodels
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.example.my_onlinestore.model.Product
 import com.example.my_onlinestore.model.server_dto.ServerCategory
 import java.io.Serializable

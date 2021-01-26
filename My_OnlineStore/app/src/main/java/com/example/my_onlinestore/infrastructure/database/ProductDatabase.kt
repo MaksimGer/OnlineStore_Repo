@@ -1,6 +1,5 @@
 package com.example.my_onlinestore.infrastructure.database
 
-import android.content.Context
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import com.example.my_onlinestore.model.local_dto.*

@@ -19,14 +19,10 @@ class SaveCategoryViewModel @ViewModelInject constructor(
     private val mIsLoading = MutableLiveData<Boolean>(true)
     private val mOnCategorySaved = MediatorLiveData<Boolean>()
     val categoryName =  MutableLiveData<String> ("Category name")
-//    val attributes = MutableLiveData<Set<Long>>() //!!!!
     private val mAttributes = MutableLiveData<List<AddedAttributeViewModel>>()
 
     val onCategorySaved: LiveData<Boolean>
         get() = mOnCategorySaved
-
-//    val categoryName: LiveData<String>
-//        get() = mCategoryName
 
     val attributes: LiveData<List<AddedAttributeViewModel>>
         get() = mAttributes
@@ -48,9 +44,9 @@ class SaveCategoryViewModel @ViewModelInject constructor(
         viewModelScope.launch (Dispatchers.IO) {
             val attributesId = hashSetOf<Long>()
 
-            for(attibute in mAttributes.value?: listOf() ){
-                if(attibute.isAdded.value?: (false))
-                    attributesId.add(attibute.id)
+            for(attribute in mAttributes.value?: listOf() ){
+                if(attribute.isAdded.value?: (false))
+                    attributesId.add(attribute.id)
             }
 
             try {

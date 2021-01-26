@@ -9,17 +9,10 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.navigation.fragment.FragmentNavigatorExtras
-import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import com.example.my_onlinestore.R
 import com.example.my_onlinestore.databinding.FavoriteProductItemBinding
-import com.example.my_onlinestore.databinding.ProductItemBinding
-import com.example.my_onlinestore.databinding.ShowCategoryProductsBinding
 import com.example.my_onlinestore.databinding.ShowFavoriteProductsBinding
-import com.example.my_onlinestore.viewmodels.CategoryViewModel
 import com.example.my_onlinestore.viewmodels.FavoriteProductListViewModel
-import com.example.my_onlinestore.viewmodels.ProductListViewModel
 import com.example.my_onlinestore.viewmodels.ProductViewModel
 import com.example.my_onlinestore.views.adapters.Holder
 import com.example.my_onlinestore.views.adapters.HolderBinder
@@ -44,10 +37,6 @@ class ProductFavoriteFragment: Fragment (){
         holder.binding.productViewModel = viewModel
         holder.binding.productName.setOnClickListener {
             mViewModel.unLikeProduct(viewModel)
-//            val extras = FragmentNavigatorExtras(
-//                it to "productName"
-//            )
-//            findNavController().navigate(ProductsFragmentDirections.actionProductsFragmentToParametersFragment(viewModel), extras)
         }
     }
 
